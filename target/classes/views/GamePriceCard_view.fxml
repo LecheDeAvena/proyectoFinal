@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="126.0" prefWidth="811.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.GameCardController">
+   <children>
+      <HBox alignment="CENTER_LEFT" layoutX="129.0" layoutY="26.0" prefHeight="126.0" prefWidth="811.0" spacing="15.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <HBox spacing="20.0" HBox.hgrow="ALWAYS">
+               <children>
+                  <ImageView fx:id="gameImg" fitHeight="104.0" fitWidth="104.0" pickOnBounds="true" preserveRatio="true" />
+                  <VBox spacing="20.0">
+                     <children>
+                        <Label fx:id="nameLbl" text="Nombre del sitio">
+                           <font>
+                              <Font name="System Bold" size="25.0" />
+                           </font>
+                        </Label>
+                        <Label fx:id="dateLbl" text="numero de ofertas o algo">
+                           <font>
+                              <Font size="19.0" />
+                           </font>
+                        </Label>
+                     </children>
+                  </VBox>
+               </children>
+            </HBox>
+            <Label text="000.00€">
+               <font>
+                  <Font name="System Bold" size="31.0" />
+               </font>
+               <HBox.margin>
+                  <Insets />
+               </HBox.margin>
+            </Label>
+            <Button mnemonicParsing="false" prefHeight="63.0" prefWidth="143.0" text="Visitar">
+               <font>
+                  <Font name="System Bold" size="22.0" />
+               </font>
+            </Button>
+         </children>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="25.0" top="15.0" />
+         </padding>
+      </HBox>
+   </children>
+</AnchorPane>
