@@ -145,7 +145,7 @@ public class Buscador {//steam,g2a,eneba,intant gaming
 		
 		//ajustar titulo para ponerlo en la url
 		String g2aSearchString = gameTitle.replaceAll(" ","%20");
-		String instantSearchString = gameTitle.replaceAll(" ","%20");
+		String instantSearchString = gameTitle.replaceAll(" ","%20");	
 		String enebaSearchString = gameTitle.replaceAll(" ","%20");
 		
 		//meter nombre en el formato de url de la pagina
