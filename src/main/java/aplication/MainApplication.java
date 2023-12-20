@@ -30,7 +30,7 @@ public class MainApplication extends Application {
         try {
         	
         	FXMLLoader loader = new FXMLLoader();
-            loader.setLocation(MainApplication.class.getResource("../../resources/views/Pruebas.fxml"));
+            loader.setLocation(MainApplication.class.getResource("../../resources/views/Login_view.fxml"));
             //System.out.println(MainApp.class.getResource("../../resources/view/login.fxml"));
             Scene scene = new Scene(loader.load());
             primeraPantalla.setScene(scene);
