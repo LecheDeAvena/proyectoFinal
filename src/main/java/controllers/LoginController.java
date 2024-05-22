@@ -34,9 +34,9 @@ public class LoginController {
 	public void ingresar(ActionEvent event) {
 		errorLbl.setText("");
 		String datosUsu="";
-		//cambiarPantalla(event,datosUsu,"Pruebas");
-
 		ManejoDatos.sacarDatos("Persona","ramon@ram.on");
+		cambiarPantalla(event,datosUsu,"Pruebas");
+
 	}
 	
 	@FXML
