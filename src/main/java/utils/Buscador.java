@@ -1,9 +1,11 @@
 package main.java.utils;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
+import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
@@ -139,10 +141,10 @@ public class Buscador {//steam,g2a,eneba,intant gaming
 		return infoDataMap;
 	}
 	
-	public static Map<String, String>[] getOfertas(String gameTitle) {//devolver un mapa con las distintas ofertas del juego en las paginas: g2a, instant gaming, eneba
+	public static Map<String, OfertaJuego[]> getOfertas(String gameTitle) throws IOException {//devolver un mapa con las distintas ofertas del juego en las paginas: g2a, instant gaming, eneba
 
-		Map<String, String>[] infoDataMap=new Map[3];//array donde guardamos todas las ofertas [0->g2a,1->instant gamin,2->eneba]
-		
+		Map<String, OfertaJuego[]> infoDataMap=new HashMap<>();//array donde guardamos todas las ofertas [0->g2a,1->instant gamin,2->eneba]
+
 		//ajustar titulo para ponerlo en la url
 		String g2aSearchString = gameTitle.replaceAll(" ","%20");
 		String instantSearchString = gameTitle.replaceAll(" ","%20");	
@@ -154,44 +156,93 @@ public class Buscador {//steam,g2a,eneba,intant gaming
 		String enebaURL = String.format("https://www.eneba.com/us/marketplace?text=%s&sortBy=RELEVANCE_DESC", enebaSearchString);
 
 		//Conseguir el html
+		//Document g2aDoc = Jsoup.connect(g2aURL).get();
+
 		Document g2aDoc = Scraping.getHtmlDocument(g2aURL);
 		Document instantDoc = Scraping.getHtmlDocument(instantURL);
 		Document enebaDoc = Scraping.getHtmlDocument(enebaURL);
-		
+
+		System.out.println(g2aURL);
 		//sacar los elementos que nos hagan falta
 
-		Elements g2aGameTitle = g2aDoc.select("h3[class=sc-iqAclL sc-dIsUp dJFpVb eHDAgC sc-fcmMJX GYHUF]");
+		g2aDoc.select("div[indexes__ContentWrapper-wklrsw-95]").remove();//elimina elementos de la pagina no necesarios
+		Elements g2aGameTitle = g2aDoc.select("h3").select("a");
 		Elements g2aDiscountPrice = g2aDoc.select("span[data-locator=zth-price]");
+		Elements g2aDiscountPercent = g2aDoc.select("span[data-locator=zth-badge]");
+		Elements g2aDiscountURL = g2aDoc.select("h3").select("a");
 		
 		Elements instantGameTitle = instantDoc.select("div.information").select("div.name");
 		Elements instantDiscountPrice = instantDoc.select("div.information").select("div.price");
+		Elements instantDiscountPercent = instantDoc.select("div.discount");
+		Elements instantDiscountURL = instantDoc.select("a[class=cover]");
 		
 		Elements enebaGameTitle = enebaDoc.select("div.lirayz");
-		Elements enebaDiscountPrice = enebaDoc.select("span.DTv7Ag");
+		Elements enebaDiscountPrice = enebaDoc.select("span.DTv7Ag");	
+		//Elements enebaDiscountPercent = enebaDoc.select("span.PIG8fA");//Es necesario calcular
+		Elements enebaDiscountURL = enebaDoc.select("a.oSVLlh");
 
 		//Guardar datos
 		//G2A
-		Map<String,String> g2aPrices=new HashMap<String, String>();
+		//organizarse con mapas.
+		OfertaJuego[] g2aPrices=new OfertaJuego[g2aDiscountPrice.size()];
 		for (int i = 0; i < g2aDiscountPrice.size(); i++) {
-			g2aPrices.put(g2aGameTitle.get(i).text(), g2aDiscountPrice.get(i).text());
+			
+			String[] placeholder= {g2aDiscountPrice.get(i).text(),g2aDiscountURL.get(i).absUrl("href")};//0-> precio,1-> URL
+			OfertaJuego ph= new OfertaJuego();
+			ph.setTitulo(g2aGameTitle.get(i).text());
+			ph.setPrecio(placeholder[0]);
+			ph.setUrl(placeholder[1]);
+			ph.setDescuento("X%");
+			g2aPrices[i]=ph;
 		}
-		infoDataMap[0]=g2aPrices;
+		infoDataMap.put("g2a", g2aPrices);
+		
 
 		//INSTANT GAMING
-		Map<String,String> instantPrices=new HashMap<String, String>();
+		OfertaJuego[] instantPrices=new OfertaJuego[instantDiscountPrice.size()];
 		for (int i = 0; i < instantDiscountPrice.size(); i++) {
-			instantPrices.put(instantGameTitle.get(i).text(),instantDiscountPrice.get(i).text());
+			
+			String[] placeholder= {instantDiscountPrice.get(i).text(),instantDiscountURL.get(i).absUrl("href")};//0-> precio,1-> URL
+			OfertaJuego ph= new OfertaJuego();
+			ph.setTitulo(instantGameTitle.get(i).text());
+			ph.setPrecio(placeholder[0]);
+			ph.setUrl(placeholder[1]);
+			ph.setDescuento("X%");
+			instantPrices[i]=ph;
 		}
-		infoDataMap[1]=instantPrices;
+		infoDataMap.put("instant", instantPrices);
 
-		//ENEBA
-		Map<String,String> enebaPrices=new HashMap<String, String>();
+		//ENEBA old
+		/*Map<String,String[]> enebaPrices=new HashMap<String, String[]>();
 		for (int i = 0; i < enebaDiscountPrice.size(); i++) {
-			enebaPrices.put(enebaGameTitle.get(i).text(), enebaDiscountPrice.get(i).text());
+			String[] placeholder= {enebaDiscountPrice.get(i).text(),enebaDiscountURL.get(i).absUrl("href")};//0-> precio, calcular porcentaje, 1-> URL
+			enebaPrices.put(enebaGameTitle.get(i).text(), placeholder);
 		}
-		infoDataMap[2]=enebaPrices;
+		infoDataMap[2]=enebaPrices;*/
 		
+		//ENEBA
+		OfertaJuego[] enebaPrices=new OfertaJuego[enebaDiscountPrice.size()];
+		//recoger todos los datos necesarios y meterlos en un array
+		for (int i = 0; i < enebaDiscountPrice.size(); i++) {
+			
+			String[] placeholder= {enebaDiscountPrice.get(i).text(),enebaDiscountURL.get(i).absUrl("href")};//0-> precio, 1-> URL
+			//Objeto con datos de la oferta
+			OfertaJuego ph= new OfertaJuego();
+			ph.setTitulo(enebaGameTitle.get(i).text());
+			placeholder[0]=placeholder[0].substring(1)+"€";//Ordenar el simbolo €
+			ph.setPrecio(placeholder[0]);
+			ph.setUrl(placeholder[1]);
+			ph.setDescuento("X%");
+			
+			enebaPrices[i]=ph;
+		}
+		infoDataMap.put("eneba", enebaPrices);
+		
+		//System.out.println(g2aURL); POr ver (no va)
+		//System.out.println(infoDataMap.keySet()+" // "+infoDataMap.get("instant")[0].getUrl());//SYSO PRUEBAS
 		return infoDataMap;
 		
 	}
 }
+
+

@@ -31,7 +31,12 @@
             <VBox alignment="CENTER" spacing="20.0">
                <children>
                   <Label fx:id="errorLbl" text="AAAAAAAAAAAAAAAAAAAAAAAAA" textFill="#f80000" />
-                  <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#ingresar" text="Button" />
+                  <VBox alignment="CENTER">
+                     <children>
+                        <Button fx:id="LoginBtn" mnemonicParsing="false" onAction="#ingresar" text="Button" />
+                        <Hyperlink fx:id="RegisterLink" onAction="#registrar" text="Registrarse" />
+                     </children>
+                  </VBox>
                </children>
             </VBox>
          </children>

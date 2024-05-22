@@ -14,7 +14,7 @@
             <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES" />
             <VBox prefHeight="200.0" prefWidth="100.0" HBox.hgrow="ALWAYS">
                <children>
-                  <HBox VBox.vgrow="SOMETIMES">
+                  <HBox alignment="CENTER" spacing="30.0" VBox.vgrow="SOMETIMES">
                      <children>
                         <ImageView fx:id="gameImg" fitHeight="225.0" fitWidth="278.0" pickOnBounds="true" preserveRatio="true" />
                         <VBox HBox.hgrow="ALWAYS">
@@ -57,22 +57,79 @@
                         </VBox>
                      </children>
                   </HBox>
-                  <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <VBox prefHeight="200.0" prefWidth="100.0" spacing="20.0" VBox.vgrow="ALWAYS">
                      <children>
                         <Label text="OFERTAS">
                            <font>
                               <Font name="System Bold" size="25.0" />
                            </font>
                         </Label>
-                        <ListView fx:id="offersList" prefHeight="319.0" prefWidth="619.0" VBox.vgrow="ALWAYS" />
+                        <HBox VBox.vgrow="ALWAYS">
+                           <children>
+                              <ToolBar orientation="VERTICAL" prefHeight="40.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
+                                <items>
+                                  <Button fx:id="g2aBtn" mnemonicParsing="false">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/G2A_logo.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="instantBtn" mnemonicParsing="false">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/logo-instant-gaminf.jpg" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                    <Button fx:id="enebaBtn" mnemonicParsing="false">
+                                       <graphic>
+                                          <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
+                                             <image>
+                                                <Image url="@../images/eneba-logo-vector.png" />
+                                             </image>
+                                          </ImageView>
+                                       </graphic>
+                                    </Button>
+                                </items>
+                              </ToolBar>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <ListView fx:id="offersList" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS" VBox.vgrow="ALWAYS" />
+                                    <VBox alignment="CENTER">
+                                       <children>
+                                          <HBox alignment="CENTER">
+                                             <children>
+                                                <Label text="Se han encontrado " />
+                                                <Label fx:id="notificationLbl" text="X " />
+                                                <Label text="ofertas" />
+                                             </children>
+                                          </HBox>
+                                          <Button fx:id="webBtn" mnemonicParsing="false" text="Ir a la página" />
+                                       </children>
+                                    </VBox>
+                                 </children>
+                              </VBox>
+                           </children>
+                        </HBox>
                      </children>
+                     <VBox.margin>
+                        <Insets bottom="60.0" />
+                     </VBox.margin>
                   </VBox>
                </children>
                <padding>
                   <Insets top="50.0" />
                </padding>
             </VBox>
-            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES" />
+            <Pane prefHeight="200.0" prefWidth="200.0" HBox.hgrow="SOMETIMES">
+               <children>
+                  <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true" />
+               </children></Pane>
          </children>
       </HBox>
    </children>

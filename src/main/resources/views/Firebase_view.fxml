@@ -4,45 +4,74 @@
 <?import java.lang.*?>
 <?import javafx.scene.layout.*?>
 
-
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="main.java.controllers.FirebaseController">
    <children>
       <HBox alignment="CENTER" layoutX="34.0" layoutY="62.0" prefHeight="400.0" prefWidth="600.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0" HBox.hgrow="ALWAYS">
                <children>
-                  <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="15.0">
+                  <HBox alignment="CENTER_LEFT">
                      <children>
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
+                        <Pane prefHeight="200.0" prefWidth="125.0" HBox.hgrow="SOMETIMES" />
+                        <HBox alignment="CENTER" prefHeight="200.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
                            <children>
-                              <Label text="Nombre" />
-                              <TextField fx:id="NameField" />
+                              <VBox alignment="CENTER" spacing="20.0" HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <HBox alignment="BOTTOM_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Nombre" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Contraseña" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Confirmar contraseña" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <Label text="Correo" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
+                              <VBox alignment="CENTER" spacing="15.0">
+                                 <children>
+                                    <HBox alignment="BOTTOM_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="nameField" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="passField" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="confPassField" />
+                                       </children>
+                                    </HBox>
+                                    <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="20.0">
+                                       <children>
+                                          <TextField fx:id="mailField" />
+                                       </children>
+                                    </HBox>
+                                 </children>
+                              </VBox>
                            </children>
                         </HBox>
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
-                           <children>
-                              <Label text="Label" />
-                              <TextField />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
-                           <children>
-                              <Label text="Label" />
-                              <TextField />
-                           </children>
-                        </HBox>
-                        <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
-                           <children>
-                              <Label text="Label" />
-                              <TextField />
-                           </children>
-                        </HBox>
+                        <Pane prefHeight="200.0" prefWidth="125.0" HBox.hgrow="SOMETIMES" />
                      </children>
-                  </VBox>
-                  <Label fx:id="InfoLbl" />
+                  </HBox>
+                  <Label fx:id="infoLbl" />
                   <HBox alignment="CENTER" prefWidth="200.0" spacing="20.0">
                      <children>
-                        <Button fx:id="SaveBtn" mnemonicParsing="false" onAction="#btnGuardarDatos" text="Guardar" />
+                        <Button fx:id="saveBtn" mnemonicParsing="false" onAction="#btnGuardarDatos" text="Guardar" />
                         <Button mnemonicParsing="false" text="Guardar" />
                      </children>
                   </HBox>

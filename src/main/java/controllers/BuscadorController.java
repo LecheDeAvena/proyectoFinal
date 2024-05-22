@@ -25,6 +25,8 @@ public class BuscadorController {
 	@FXML
 	private Button searchBtn;
 	
+	public static String PagAnterior;
+	
 	@FXML
 	private void initialize() {
 	}
